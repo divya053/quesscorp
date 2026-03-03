@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: hrms-lite
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: npm install && npm run db:push && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/dashboard/summary
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false

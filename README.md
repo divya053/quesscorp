@@ -35,6 +35,28 @@ Features include:
    ```
 7. Open the application in your browser at `http://localhost:5000`.
 
+## Free Deployment (Render + MySQL-Compatible Cloud DB)
+This repository includes a `render.yaml` blueprint for one-service deployment.
+
+1. Push this project to GitHub.
+2. Create a free MySQL-compatible cloud database (for example TiDB Cloud Starter) and create database `hrms_lite`.
+3. Copy your database URL in this format:
+   ```env
+   DATABASE_URL=mysql://USER:PASSWORD@HOST:PORT/hrms_lite
+   ```
+4. In Render:
+   - New -> Blueprint
+   - Select your GitHub repository
+   - Confirm `render.yaml`
+5. In Render service environment variables, set:
+   - `DATABASE_URL` = your remote DB connection string
+6. Deploy. Build runs schema push + app build automatically.
+7. Open your live app URL from Render.
+
+Notes:
+- Frontend and backend are served from the same Render URL.
+- API endpoints are available under `/api/*`.
+
 ## Assumptions or Limitations
 - **Single Admin User:** The system assumes a single admin user and does not currently implement authentication or authorization.
 - **Scope:** Advanced HR features such as payroll, leave management, and role-based access control are out of scope for this lightweight version.
